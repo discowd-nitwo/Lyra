@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { Message, SlashCommandBuilder } from "discord.js";
 import { ICommand, Category } from "../../types";
 import { CommandEvent } from "../../utils/CommandEvent";
 import { baseEmbed, errorEmbed } from "../../utils/embed";
@@ -48,9 +48,19 @@ const command: ICommand = {
       return;
     }
 
-    await event.reply(t("message.nsfw.searching"));
+    let searchingMessage: Message | undefined;
+    if (event.isSlashCommand() && event.interaction) {
+      await event.interaction.reply({ content: t("message.nsfw.searching") })
+      searchingMessage = await event.interaction.fetchReply() as Message;
+    } else if (event.message) {
+      searchingMessage = await event.message.reply({ content: t("message.nsfw.searching") });
+    }
+
+    // await event.reply(t("message.nsfw.searching"));
 
     const posts = await fetchPosts(tags || undefined);
+
+    await searchingMessage?.delete().catch(() => null)
 
     if (!posts.length) {
       await event.reply(errorEmbed(t("message.default.retrievalError")), 5);

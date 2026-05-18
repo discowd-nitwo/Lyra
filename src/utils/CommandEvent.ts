@@ -73,6 +73,8 @@ export class CommandEvent implements ICommandEvent {
       } else {
         response = await this.interaction.reply({ content });
       }
+
+      response = (await this.interaction.fetchReply()) as Message;
     } else if (this.message) {
       if (content instanceof EmbedBuilder) {
         response = await this.message.reply({ embeds: [content] });
