@@ -56,8 +56,6 @@ const command: ICommand = {
       searchingMessage = await event.message.reply({ content: t("message.nsfw.searching") });
     }
 
-    // await event.reply(t("message.nsfw.searching"));
-
     const posts = await fetchPosts(tags || undefined);
 
     await searchingMessage?.delete().catch(() => null)
