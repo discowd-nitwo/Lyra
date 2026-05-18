@@ -1,0 +1,36 @@
+{
+  "command": {
+    "description": {
+      "ping": "Check the bot's latency.",
+      "rule34": "Get a random image from Rule34.",
+      "avatar": "Get a user's avatar."
+    }
+  },
+  "message": {
+    "default": {
+      "onlyNSFW": "This command can only be used in NSFW channels.",
+      "retrievalError": "Failed to retrieve data, please try again later.",
+      "checkBelow": "Check below for your result!",
+      "noPermission": "You do not have permission to use this command.",
+      "guildOnly": "This command can only be used in a server.",
+      "noMention": {
+        "user": "Please mention a user."
+      }
+    },
+    "nsfw": {
+      "searching": "Searching for images...",
+      "notAllowed": "That tag is not allowed."
+    },
+    "ping": {
+      "response": "🏓 Pong! Latency: **{latency}ms**"
+    }
+  },
+  "label": {
+    "avatar": "Avatar"
+  },
+  "error": {
+    "generic": "Something went wrong, please try again later.",
+    "notFound": "Could not find what you were looking for.",
+    "rateLimited": "You are being rate limited, please slow down."
+  }
+}
