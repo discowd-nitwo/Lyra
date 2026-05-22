@@ -12,15 +12,22 @@ const event: LyraEvent = {
     if (!newMessage.guildId) return;
     if (oldMessage.content === newMessage.content) return;
 
+    const channel = newMessage.channel;
+    const channelName = channel.isTextBased() && 'name' in channel ? channel.name : 'Unknown';
+
     const embed = new EmbedBuilder()
       .setTitle("Message Edited")
+      .setAuthor({
+        name: newMessage.author?.tag ?? "Unknown",
+        iconURL: newMessage.author?.displayAvatarURL() ?? undefined,
+      })
+      .setDescription(`> **Channel**: ${channelName} <#${newMessage.channelId}>\n> **Message ID**: ${`[${newMessage.id}`}](${newMessage.url})\n> **Message Author**: @${newMessage.author?.username} (<@${newMessage.author?.id}>)\n> **Message Created**: <t:${Math.floor(oldMessage.createdTimestamp / 1000)}:R>`)
       .addFields(
-        { name: "Author", value: `<@${newMessage.author?.id}> (${newMessage.author?.tag ?? "Unknown"})`, inline: true },
-        { name: "Channel", value: `<#${newMessage.channelId}>`, inline: true },
-        { name: "Before", value: oldMessage.content || "Unknown", inline: false },
-        { name: "After", value: newMessage.content || "Unknown", inline: false },
-        { name: "Jump to Message", value: `[Click here](${newMessage.url})`, inline: false }
-      );
+        { name: "Before", value: (oldMessage.content || "Unknown").slice(0, 1024), inline: true },
+        { name: "After", value: (newMessage.content || "Unknown").slice(0, 1024), inline: true },
+      )
+      .setFooter({ text: `User ID: ${newMessage.author?.id}` })
+      .setTimestamp();
 
     await sendAuditLog(client, {
       guildId: newMessage.guildId,

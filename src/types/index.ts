@@ -5,7 +5,9 @@ export enum Category {
   MODERATION = "moderation",
   FUN = "fun",
   UTILITY = "utility",
-  MUSIC = "music"
+  MUSIC = "music",
+  CONFIG = "config",
+  DEV = "dev"
 }
 
 export interface ICommand {
@@ -38,6 +40,7 @@ export interface LyraConfig {
   prefix: string;
   advertisement: string;
   version: string;
+  ownerId: string;
 }
 
 export interface Rule34Post {

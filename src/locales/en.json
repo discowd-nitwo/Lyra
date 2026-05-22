@@ -3,7 +3,11 @@
     "description": {
       "ping": "Check the bot's latency.",
       "rule34": "Get a random image from Rule34.",
-      "avatar": "Get a user's avatar."
+      "avatar": "Get a user's avatar.",
+      "auditlogsetup": "Setup audit logs in your server",
+      "userinfo": "Get information about a user.",
+      "reload": "Hot-reload all events (bot owner only)",
+      "donate": "Find out how to donate to us!"
     }
   },
   "message": {
@@ -16,6 +20,12 @@
       "noMention": {
         "user": "Please mention a user."
       }
+    },
+    "reload": {
+      "noPermission": "Only the bot owner can use this command.",
+      "reloading": "Reloading all events...",
+      "success": "Successfully reloaded {loaded} events.",
+      "partial": "Reloaded {loaded} events with {failed} failure(s):\n{errors}"
     },
     "nsfw": {
       "searching": "Searching for images...",

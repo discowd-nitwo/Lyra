@@ -1,4 +1,4 @@
-import { Message, SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
 import { ICommand, Category } from "../../types";
 import { CommandEvent } from "../../utils/CommandEvent";
 import { baseEmbed, errorEmbed } from "../../utils/embed";
@@ -22,7 +22,6 @@ function containsBannedTags(tags: string): boolean {
     .replace(/4/g, "a")
     .replace(/5/g, "s")
     .replace(/7/g, "t");
-
   return BANNED_TAGS.some((tag) => normalized.includes(tag));
 }
 
@@ -48,33 +47,47 @@ const command: ICommand = {
       return;
     }
 
-    let searchingMessage: Message | undefined;
     if (event.isSlashCommand() && event.interaction) {
-      await event.interaction.reply({ content: t("message.nsfw.searching") })
-      searchingMessage = await event.interaction.fetchReply() as Message;
+      await event.interaction.reply({ content: t("message.nsfw.searching") });
+
+      const posts = await fetchPosts(tags || undefined);
+
+      if (!posts.length) {
+        await event.interaction.editReply({ content: t("message.default.retrievalError") });
+        return;
+      }
+
+      const post = randomElement(posts);
+      const embed = baseEmbed()
+        .setImage(post.url)
+        .setFooter({
+          text: `${event.getMemberName()} - ${config.advertisement}`,
+          iconURL: event.getMemberAvatarUrl(),
+        });
+
+      await event.interaction.editReply({ content: "", embeds: [embed] });
+
     } else if (event.message) {
-      searchingMessage = await event.message.reply({ content: t("message.nsfw.searching") });
+      const searchingMessage = await event.message.reply({ content: t("message.nsfw.searching") });
+
+      const posts = await fetchPosts(tags || undefined);
+      await searchingMessage.delete().catch(() => null);
+
+      if (!posts.length) {
+        await event.reply(errorEmbed(t("message.default.retrievalError")), 5);
+        return;
+      }
+
+      const post = randomElement(posts);
+      const embed = baseEmbed()
+        .setImage(post.url)
+        .setFooter({
+          text: `${event.getMemberName()} - ${config.advertisement}`,
+          iconURL: event.getMemberAvatarUrl(),
+        });
+
+      await event.reply(embed);
     }
-
-    const posts = await fetchPosts(tags || undefined);
-
-    await searchingMessage?.delete().catch(() => null)
-
-    if (!posts.length) {
-      await event.reply(errorEmbed(t("message.default.retrievalError")), 5);
-      return;
-    }
-
-    const post = randomElement(posts);
-
-    const embed = baseEmbed()
-      .setImage(post.url)
-      .setFooter({
-        text: `${event.getMemberName()} - ${config.advertisement}`,
-        iconURL: event.getMemberAvatarUrl(),
-      });
-
-    await event.reply(embed);
   },
 
   getSlashCommand(): SlashCommandBuilder {

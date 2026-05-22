@@ -3,7 +3,7 @@ import { LyraEvent } from ".";
 import { LyraClient } from "../types";
 import { config } from "../config";
 import { CommandEvent } from "../utils/CommandEvent";
-import { errorEmbed } from "../utils/embed";
+import { baseEmbed, errorEmbed } from "../utils/embed";
 import { t } from "../utils/i18n";
 import { logger } from "../utils/logger";
 
@@ -13,6 +13,18 @@ const event: LyraEvent = {
 
   async execute(client: LyraClient, message: Message) {
     if (message.author.bot) return;
+    if (message.content.startsWith(`<@${client.user?.id}>`)) {
+      message.react('👋')
+
+      const embed = baseEmbed()
+        .setTitle("hey!")
+        .setDescription(`My prefix is currently \`${config.prefix}\`!`)
+        .setFooter({ text: `${client.user?.tag}`, iconURL: client.user?.displayAvatarURL() })
+      
+      const sent = await message.reply({ embeds: [embed] });
+      setTimeout(() => sent.delete().catch(() => {}), 5000)
+      return
+    };
     if (!message.content.startsWith(config.prefix)) return;
 
     const [commandName, ...args] = message.content

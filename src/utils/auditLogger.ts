@@ -49,7 +49,9 @@ export async function sendAuditLog(
     options.embed.setColor(EVENT_COLOURS[options.eventType]);
     options.embed.setTimestamp();
 
-    await channel.send({ embeds: [options.embed] });
+    await channel.send({ embeds: [options.embed], allowedMentions: {
+      parse: []
+    } });
 
     await prisma.auditLogEvent.create({
       data: {

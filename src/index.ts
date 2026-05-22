@@ -19,7 +19,6 @@ async function bootstrap(): Promise<void> {
       GatewayIntentBits.GuildMembers,
       GatewayIntentBits.MessageContent,
       GatewayIntentBits.GuildModeration,
-      GatewayIntentBits.GuildBans,
       GatewayIntentBits.MessageContent
     ],
   }) as LyraClient;
