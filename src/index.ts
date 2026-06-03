@@ -1,13 +1,11 @@
+import "./instrument";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
-import * as dotenv from "dotenv";
 import { ICommand, LyraClient } from "./types";
 import { logger, printBanner } from "./utils/logger";
 import { loadCommands } from "./commands";
 import { loadEvents } from "./events";
 import { loadLocale } from "./utils/i18n";
 import prisma from "./database";
-
-dotenv.config({ quiet: true });
 
 async function bootstrap(): Promise<void> {
   printBanner();
@@ -28,6 +26,7 @@ async function bootstrap(): Promise<void> {
 
   await loadLocale();
 
+  logger.info("Attempting to connect to the database")
   await prisma.$connect();
   logger.info("Connected to database");
 

@@ -1,10 +1,10 @@
-import { GuildMember, PartialGuildMember, EmbedBuilder } from "discord.js";
+import { GuildMember, PartialGuildMember, EmbedBuilder, Events } from "discord.js";
 import { LyraEvent } from "./index";
 import { LyraClient } from "../types";
 import { sendAuditLog, AuditEventType } from "../utils/auditLogger";
 
 const event: LyraEvent = {
-  name: "guildMemberRemove",
+  name: Events.GuildMemberRemove,
   once: false,
 
   async execute(client: LyraClient, member: GuildMember | PartialGuildMember): Promise<void> {

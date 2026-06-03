@@ -8,7 +8,7 @@ const logFormat = printf(({ level, message, timestamp }) => {
 });
 
 export const logger = winston.createLogger({
-  level: "info",
+  level: process.env.LOG_LEVEL ?? "info",
   format: combine(
     colorize(),
     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
@@ -26,6 +26,9 @@ export const logger = winston.createLogger({
   ],
 });
 
+const versionTag = process.env.NODE_ENV === "dev" ? `v${config.version}_dev` : `v${config.version}`;
+const debugTag = process.env.LOG_LEVEL === "debug" ? " [debug mode]" : "";
+
 export function printBanner(): void {
   console.log(`
   ██╗  ██╗   ██╗██████╗  █████╗ 
@@ -34,6 +37,6 @@ export function printBanner(): void {
   ██║    ╚██╔╝  ██╔══██╗██╔══██║
   ███████╗██║   ██║  ██║██║  ██║
   ╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝
-                        v${config.version}
+                        ${versionTag}${debugTag}
   `);
 }

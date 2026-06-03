@@ -1,10 +1,10 @@
-import { Message, PartialMessage, EmbedBuilder } from "discord.js";
+import { Message, PartialMessage, EmbedBuilder, Events } from "discord.js";
 import { LyraEvent } from ".";
 import { LyraClient } from "../types";
 import { sendAuditLog, AuditEventType } from "../utils/auditLogger";
 
 const event: LyraEvent = {
-  name: "messageUpdate",
+  name: Events.MessageUpdate,
   once: false,
 
   async execute(client: LyraClient, oldMessage: Message | PartialMessage, newMessage: Message | PartialMessage): Promise<void> {

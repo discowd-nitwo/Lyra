@@ -36,7 +36,7 @@ const event: LyraEvent = {
       }
 
       await command.execute(event);
-      logger.info(`${interaction.user.username} used /${command.name}`);
+      logger.debug(`${interaction.user.username} used /${command.name}`);
     } catch (err) {
       await interaction.reply({
         embeds: [errorEmbed(t("error.generic"))],

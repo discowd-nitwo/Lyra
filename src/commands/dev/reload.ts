@@ -16,6 +16,7 @@ async function reloadEvents(
   const eventFiles = readdirSync(eventsPath).filter(
     (file) =>
       (file.endsWith(".ts") || file.endsWith(".js")) &&
+      !file.endsWith(".d.ts") &&
       file !== "index.ts" &&
       file !== "index.js",
   );
@@ -48,7 +49,7 @@ async function reloadEvents(
       }
 
       loaded++;
-      logger.info(`Reloaded event: ${event.name}`);
+      logger.debug(`Reloaded event: ${event.name}`);
     } catch (err) {
       logger.error(`Failed to reload event ${file}: ${err}`);
       errors.push(`${file}: ${err}`);
@@ -94,7 +95,7 @@ const command: ICommand = {
       );
     }
 
-    logger.info(
+    logger.debug(
       `Events reloaded by ${authorId}: ${loaded} loaded, ${failed} failed`,
     );
   },

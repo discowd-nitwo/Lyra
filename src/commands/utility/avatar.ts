@@ -17,18 +17,28 @@ const command: ICommand = {
     if (event.isSlashCommand()) {
       user = event.interaction?.options.getUser("target") ?? null;
     } else {
-      const mentions = event.message?.mentions.users;
-      if (event.args?.length && mentions?.size === 0) {
-        await event.reply(errorEmbed(t("message.default.noMention.user")), 5);
-        return;
+      const arg = event.args?.[0];
+      const userId = arg?.replace(/[<@!>]/g, ""); // handles both raw IDs and mentions
+
+      if (userId && /^\d+$/.test(userId)) {
+        user =
+          (await event.client.users.fetch(userId).catch(() => null)) ?? null;
       }
-      user = mentions?.first() ?? null;
+
+      if (!user) {
+        const mentions = event.message?.mentions.users;
+        if (event.args?.length && mentions?.size === 0) {
+          await event.reply(errorEmbed(t("message.default.noMention.user")), 5);
+          return;
+        }
+        user = mentions?.first() ?? null;
+      }
     }
 
     if (!user) {
       user = event.isSlashCommand()
-        ? event.interaction?.user ?? null
-        : event.message?.author ?? null;
+        ? (event.interaction?.user ?? null)
+        : (event.message?.author ?? null);
     }
 
     if (!user) {
@@ -49,7 +59,6 @@ const command: ICommand = {
         iconURL: event.getMemberAvatarUrl(),
       });
 
-
     await event.reply(embed);
   },
 
@@ -61,7 +70,7 @@ const command: ICommand = {
         option
           .setName("target")
           .setDescription("The user whose avatar you want")
-          .setRequired(false)
+          .setRequired(false),
       ) as SlashCommandBuilder;
   },
 };

@@ -1,30 +1,31 @@
-import { AuditLogEvent, EmbedBuilder, Message, PartialMessage } from "discord.js";
+import { EmbedBuilder, Events, Message, PartialMessage } from "discord.js";
 import { LyraEvent } from ".";
 import { LyraClient } from "../types";
 import { AuditEventType, sendAuditLog } from "../utils/auditLogger";
 
 const event: LyraEvent = {
-  name: "messageDelete",
-  once: false,
+  name: Events.MessageDelete,
 
   async execute(client: LyraClient, message: Message | PartialMessage): Promise<void> {
-    if (message.author?.bot) return;
-    if (!message.guild) return;
-    if (!message.guildId) return;
+    if (!message.guild || !message.author || message.author.bot || !message) return;
 
-    await new Promise(r => setTimeout(r, 500));
-
+    const channel = message.channel;
+    const channelName = channel.isTextBased() && 'name' in channel ? channel.name : 'Unknown';
     const embed = new EmbedBuilder()
       .setTitle("Message Deleted")
-      .setThumbnail(message.author?.displayAvatarURL() ?? null)
+      .setAuthor({
+        name: message.author.tag ?? "Unknown",
+        iconURL: message.author.displayAvatarURL() ?? undefined,
+      })
+      .setDescription(`> **Channel**: ${channelName} <#${message.channelId}>\n> **Message ID**: ${`[${message.id}`}](${message.url})\n> **Message Author**: @${message.author.username} (<@${message.author.id}>)\n> **Message Created**: <t:${Math.floor(message.createdTimestamp / 1000)}:R>`)
       .addFields(
-        { name: "Author", value: `<@${message.author?.id}> (${message.author?.tag ?? "Unknown"})`, inline: true },
-        { name: "Channel", value: `<#${message.channelId}>`, inline: true },
-        { name: "Content", value: message.content || "No content (embed or attachment)".slice(0, 1024), inline: false }
-      );
+        { name: "Message", value: (message.content || "Unknown").slice(0, 1024), inline: true }
+      )
+      .setFooter({ text: `User ID: ${message.author.id}` })
+      .setTimestamp();
 
     await sendAuditLog(client, {
-      guildId: message.guildId,
+      guildId: message.guildId as string,
       eventType: AuditEventType.MESSAGE_DELETE,
       embed,
       userId: message.author?.id,

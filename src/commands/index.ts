@@ -18,7 +18,7 @@ export async function loadCommands(client:LyraClient): Promise<void> {
   for (const category of categories) {
     const categoryPath = join(categoriesPath, category);
     const commandFiles = readdirSync(categoryPath).filter((file) =>
-      file.endsWith(".ts") || file.endsWith(".js")
+      (file.endsWith(".ts") && !file.endsWith(".d.ts")) || file.endsWith(".js")
     );
 
     for (const file of commandFiles) {
@@ -41,7 +41,7 @@ export async function loadCommands(client:LyraClient): Promise<void> {
         }
 
         loaded++;
-        logger.info(`Loaded command: ${command.name} [${command.category}]`);
+        logger.debug(`Loaded command: ${command.name} [${command.category}]`);
       } catch (err) {
         logger.error(`Failed to load command ${file}: ${err}`);
         failed++;

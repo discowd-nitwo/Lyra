@@ -1,23 +1,19 @@
-import { EmbedBuilder, GuildMember } from "discord.js";
+import { EmbedBuilder, Events, GuildMember, inlineCode } from "discord.js";
 import { LyraEvent } from ".";
 import { LyraClient } from "../types";
 import { AuditEventType, sendAuditLog } from "../utils/auditLogger";
 
 const event: LyraEvent = {
-  name: "guildMemberAdd",
+  name: Events.GuildMemberAdd,
   once: false,
 
   async execute(client: LyraClient, member: GuildMember): Promise<void> {
     const embed = new EmbedBuilder()
-      .setTitle("Member Joined")
+      .setTitle("User Joined")
       .setThumbnail(member.user.displayAvatarURL())
-      .addFields(
-        { name: "User", value: `<@${member.user.id}> (${member.user.tag})`, inline: true },
-        { name: "ID", value: member.user.id, inline: true },
-        { name: "Account Created", value: `<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>` },
-        { name: "Member Count", value: member.guild.memberCount.toString(), inline: true }
-      );
-
+      .setDescription(`> **User**: @${member.user.username} (<@${member.user.id}>)\n> **ID:** ${inlineCode(member.user.id)}\n> **Created:** <t:${Math.floor(member.user.createdTimestamp / 1000)}:R>\n> **Members:** ${member.guild.memberCount}`)
+      .setTimestamp();
+      
     await sendAuditLog(client, {
       guildId: member.guild.id,
       eventType: AuditEventType.MEMBER_JOIN,

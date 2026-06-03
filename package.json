@@ -15,10 +15,14 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/locales dist/locales",
+    "build:win": "tsc && xcopy /E /I /Y src\\locales dist\\locales",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "deploy": "ts-node src/deploy.ts"
+    "dev": "npm run build:win && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
+    "dev:d": "ts-node src/deploy.ts && npm run dev",
+    "deploy": "ts-node src/deploy.ts",
+    "cleanup": "rimraf logs && rimraf dev.db",
+    "cleanup:dist": "rimraf logs && rimraf dev.db && rimraf dist"
   },
   "dependencies": {
     "@prisma/adapter-libsql": "^7.8.0",
@@ -33,7 +37,9 @@
     "@types/axios": "^0.9.36",
     "@types/node": "^25.9.0",
     "@types/winston": "^2.4.4",
+    "cross-env": "^10.1.0",
     "prisma": "^7.8.0",
+    "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   }

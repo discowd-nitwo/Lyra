@@ -1,10 +1,10 @@
-import { AuditLogEvent, EmbedBuilder, GuildBan } from "discord.js";
+import { AuditLogEvent, EmbedBuilder, Events, GuildBan } from "discord.js";
 import { LyraEvent } from ".";
 import { LyraClient } from "../types";
 import { AuditEventType, sendAuditLog } from "../utils/auditLogger";
 
 const event: LyraEvent = {
-  name: "guildBanAdd",
+  name: Events.GuildBanAdd,
   once: false,
 
   async execute(client: LyraClient, ban: GuildBan): Promise<void> {

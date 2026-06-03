@@ -1,7 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
-import { Category, ICommand, CommandEvent } from "../../types";
+import { Category, ICommand } from "../../types";
 import { infoEmbed } from "../../utils/embed";
 import { t } from "../../utils/i18n";
+import { CommandEvent } from "../../utils/CommandEvent";
 
 const command: ICommand = {
   name: "ping",

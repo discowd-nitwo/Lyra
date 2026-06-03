@@ -12,7 +12,7 @@ export interface LyraEvent {
 export async function loadEvents(client: LyraClient): Promise<void> {
   const eventsPath = join(__dirname);
   const eventFiles = readdirSync(eventsPath).filter(
-    (file) => (file.endsWith(".ts") || file.endsWith(".js")) && file !== "index.ts" && file !== "index.js"
+    (file) => (file.endsWith(".ts") && !file.endsWith(".d.ts") || file.endsWith(".js")) && file !== "index.ts" && file !== "index.js"
   );
 
   let loaded = 0;
@@ -36,7 +36,7 @@ export async function loadEvents(client: LyraClient): Promise<void> {
       }
 
       loaded++;
-      logger.info(`Loaded event: ${event.name}`);
+      logger.debug(`Loaded event: ${event.name}`);
     } catch (err) {
       logger.error(`Failed to load event ${file}: ${err}`)
       failed++;

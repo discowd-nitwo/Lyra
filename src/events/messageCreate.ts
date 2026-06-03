@@ -51,7 +51,7 @@ const event: LyraEvent = {
       }
 
       await command.execute(event);
-      logger.info(`${message.author.username} used ${config.prefix}${command.name}`)
+      logger.debug(`${message.author.username} used ${config.prefix}${command.name}`)
     } catch (err) {
       logger.error(`Error executing command ${command.name}: ${err}`);
       await message.reply({

@@ -7,13 +7,14 @@ import { SlashCommandBuilder } from "discord.js";
 
 const command: ICommand = {
   name: "mclookup",
-  description: "placeholder",
+  description: "Look up a Minecraft: Java Edition account's name and skin download.",
   category: Category.FUN,
   aliases: [],
 
   async execute(event: CommandEvent) {
     if (!event.isSlashCommand()) {
       await event.reply("We do not currently support text commands for this!", 5);
+      await event.message?.react("✅")
       return;
     }
 
@@ -38,12 +39,13 @@ const command: ICommand = {
       return;
     }
 
-    const uuid = formatUUID(uuidReq.data.id);
+    const uuid = uuidReq.data.id;
+    const formattedUuid = formatUUID(uuid);
 
     const embed = baseEmbed()
       .setTitle(uuidReq.data.name)
       .setURL(`https://namemc.com/profile/${uuid}`)
-      .setDescription(`**UUID**: \`${uuid}\`\n[Skin download](https://mineskin.eu/skin/${uuidReq.data.name})`)
+      .setDescription(`**UUID**: \`${formattedUuid}\`\n**Stripped UUID**: \`${uuid}\`\n[Skin download](https://mineskin.eu/skin/${uuidReq.data.name})`)
       .setThumbnail(`https://api.mineatar.io/face/${uuid}?scale=50`)
       .setFooter({ text: "Lyra Bot", iconURL: event.client.user?.displayAvatarURL() })
       .setTimestamp();
@@ -54,11 +56,11 @@ const command: ICommand = {
   getSlashCommand(): SlashCommandBuilder {
     return new SlashCommandBuilder()
       .setName("mclookup")
-      .setDescription("placeholder")
+      .setDescription("Look up a Minecraft: Java Edition account's name and skin download.")
       .addStringOption((option) =>
         option
           .setName("username")
-          .setDescription("placeholder")
+          .setDescription("The username to look up")
           .setRequired(true),
       ) as SlashCommandBuilder;
   },

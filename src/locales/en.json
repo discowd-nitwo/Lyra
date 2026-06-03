@@ -7,7 +7,13 @@
       "auditlogsetup": "Setup audit logs in your server",
       "userinfo": "Get information about a user.",
       "reload": "Hot-reload all events (bot owner only)",
-      "donate": "Find out how to donate to us!"
+      "donate": "Find out how to donate to us!",
+      "slowmode": "Set or remove slowmode for a channel"
+    },
+    "option": {
+      "slowmode": {
+        "duration": "Duration in seconds (0 to remove, max 21600)"
+      }
     }
   },
   "message": {
@@ -20,6 +26,14 @@
       "noMention": {
         "user": "Please mention a user."
       }
+    },
+    "slowmode": {
+      "notTextChannel": "Slowmode can only be set in text channels.",
+      "invalid": "Please provide a valid number of seconds.",
+      "tooHigh": "Slowmode cannot exceed 6 hours (21600 seconds).",
+      "removed": "Slowmode has been removed from this channel.",
+      "set": "Slowmode set to {duration} seconds.",
+      "query": "Slowmode is currently set to {duration} seconds."
     },
     "reload": {
       "noPermission": "Only the bot owner can use this command.",

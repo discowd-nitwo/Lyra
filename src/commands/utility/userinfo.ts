@@ -23,7 +23,14 @@ const command: ICommand = {
     if (event.isSlashCommand()) {
       user = event.interaction?.options.getUser("target") ?? event.interaction?.user ?? null;
     } else {
-      user = event.message?.mentions.users.first() ?? event.message?.author ?? null;
+      const arg = event.args?.[0];
+      const userId = arg?.replace(/[<@!>]/g, ""); // strip mention formatting if present
+
+      if (userId && /^\d+$/.test(userId)) {
+        user = await event.client.users.fetch(userId).catch(() => null) ?? null;
+      }
+
+      user = user ?? event.message?.author ?? null;
     }
 
     if (!user) {

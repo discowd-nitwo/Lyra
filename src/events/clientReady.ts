@@ -9,7 +9,7 @@ const event: LyraEvent = {
   async execute(client): Promise<void> {
     logger.info(`Lyra v${config.version} is online as ${client.user?.tag}`);
 
-    client.user?.setPresence({ activities: [{ name: `Lyra | !ping | ${client.guilds.cache.size} servers` }], status: PresenceUpdateStatus.Idle })
+    client.user?.setPresence({ activities: [{ name: `Lyra | ${config.prefix}ping | ${client.guilds.cache.size} servers` }], status: PresenceUpdateStatus.Idle })
   },
 };
 

@@ -17,11 +17,11 @@ export interface ICommand {
   aliases?: string[];
   guildOnly?: boolean;
   nsfwOnly?: boolean;
-  execute(event: CommandEvent): Promise<void>;
+  execute(event: ICommandEvent): Promise<void>;
   getSlashCommand?(): SlashCommandBuilder;
 }
 
-export interface CommandEvent {
+export interface ICommandEvent {
   client: LyraClient;
   interaction?: ChatInputCommandInteraction;
   message?: Message;

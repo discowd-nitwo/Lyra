@@ -6,7 +6,7 @@ import {
   TextChannel,
   ChannelType,
 } from "discord.js";
-import { LyraClient, CommandEvent as ICommandEvent } from "../types";
+import { LyraClient, ICommandEvent } from "../types";
 
 export class CommandEvent implements ICommandEvent {
   client: LyraClient;
