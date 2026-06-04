@@ -8,7 +8,8 @@
       "userinfo": "Get information about a user.",
       "reload": "Hot-reload all events (bot owner only)",
       "donate": "Find out how to donate to us!",
-      "slowmode": "Set or remove slowmode for a channel"
+      "slowmode": "Set or remove slowmode for a channel",
+      "randomColour": "Returns a random hex colour."
     },
     "option": {
       "slowmode": {

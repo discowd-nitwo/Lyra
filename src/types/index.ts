@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Client, Collection, ColorResolvable, Message, SlashCommandBuilder } from "discord.js";
+import { AttachmentBuilder, ChatInputCommandInteraction, Client, Collection, ColorResolvable, EmbedBuilder, Message, SlashCommandBuilder } from "discord.js";
 
 export enum Category {
   NSFW = "nsfw",
@@ -49,4 +49,11 @@ export interface Rule34Post {
   tags: string;
   score: number;
   rating: string;
+}
+
+export interface IReplyOptions {
+  embed?: EmbedBuilder;
+  content?: string;
+  files?: AttachmentBuilder[];
+  deleteAfter?: number;
 }

@@ -6,7 +6,7 @@ import {
   TextChannel,
   ChannelType,
 } from "discord.js";
-import { LyraClient, ICommandEvent } from "../types";
+import { LyraClient, ICommandEvent, IReplyOptions } from "../types";
 
 export class CommandEvent implements ICommandEvent {
   client: LyraClient;
@@ -62,28 +62,36 @@ export class CommandEvent implements ICommandEvent {
   }
 
   async reply(
-    content: string | EmbedBuilder,
+    content: string | EmbedBuilder | IReplyOptions,
     deleteAfter?: number
   ): Promise<void> {
     let response: Message | InteractionResponse | undefined;
 
-    if (this.isSlashCommand() && this.interaction) {
-      if (content instanceof EmbedBuilder) {
-        response = await this.interaction.reply({ embeds: [content] });
-      } else {
-        response = await this.interaction.reply({ content });
-      }
-
-      response = (await this.interaction.fetchReply()) as Message;
-    } else if (this.message) {
-      if (content instanceof EmbedBuilder) {
-        response = await this.message.reply({ embeds: [content] });
-      } else {
-        response = await this.message.reply({ content });
-      }
+    let options: IReplyOptions;
+    if (typeof content === "string") {
+      options = { content, deleteAfter };
+    } else if (content instanceof EmbedBuilder) {
+      options = { embed: content, deleteAfter };
+    } else {
+      options = content;
     }
 
-    if (deleteAfter && response) {
+    const payload = {
+      ...(options.content && { content: options.content }),
+      ...(options.embed && { embeds: [options.embed] }),
+      ...(options.files && { files: options.files }),
+
+    }
+
+    if (this.isSlashCommand() && this.interaction) {
+      response = await this.interaction.reply(payload);
+      response = (await this.interaction.fetchReply()) as Message;
+    } else if (this.message) {
+      response = await this.message.reply(payload);
+    }
+
+    const delay = options.deleteAfter ?? deleteAfter;
+    if (delay && response) {
       setTimeout(async () => {
         try {
           if (response instanceof Message) {
@@ -92,7 +100,7 @@ export class CommandEvent implements ICommandEvent {
         } catch {
           // Message may have already been deleted
         }
-      }, deleteAfter * 1000);
+      }, delay * 1000);
     }
   }
 }
