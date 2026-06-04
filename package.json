@@ -31,13 +31,11 @@
     "canvas": "^3.2.3",
     "discord.js": "^14.26.4",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1",
     "libsql": "^0.5.29",
     "winston": "^3.19.0"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
-    "@types/express": "^5.0.6",
     "@types/node": "^25.9.0",
     "@types/winston": "^2.4.4",
     "cross-env": "^10.1.0",
