@@ -9,11 +9,15 @@
       "reload": "Hot-reload all events (bot owner only)",
       "donate": "Find out how to donate to us!",
       "slowmode": "Set or remove slowmode for a channel",
-      "randomColour": "Returns a random hex colour."
+      "randomColour": "Returns a random hex colour.",
+      "purge": "Bulk delete a number of messages from this channel"
     },
     "option": {
       "slowmode": {
         "duration": "Duration in seconds (0 to remove, max 21600)"
+      },
+      "purge": {
+        "amount": "Number of messages to delete (max 100)"
       }
     }
   },
@@ -48,6 +52,12 @@
     },
     "ping": {
       "response": "🏓 Pong! Latency: **{latency}ms**"
+    },
+    "purge": {
+      "notTextChannel": "Purge can only be used in text channels.",
+      "invalid": "Please provide a valid number of messages (minimum 1).",
+      "tooHigh": "You can only delete up to 100 messages at a time.",
+      "success": "Successfully deleted {count} message(s)."
     }
   },
   "label": {
