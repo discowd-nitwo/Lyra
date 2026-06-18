@@ -21,8 +21,8 @@
     "dev": "npm run build:win && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
     "dev:d": "ts-node src/deploy.ts && npm run dev",
     "deploy": "ts-node src/deploy.ts",
-    "cleanup": "rimraf logs && rimraf dev.db",
-    "cleanup:dist": "rimraf logs && rimraf dev.db && rimraf dist"
+    "cleanup": "rimraf logs dist",
+    "cleanup:db": "rimraf logs dev.db"
   },
   "dependencies": {
     "@prisma/adapter-libsql": "^7.8.0",

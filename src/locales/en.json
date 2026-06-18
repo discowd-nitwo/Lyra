@@ -10,7 +10,8 @@
       "donate": "Find out how to donate to us!",
       "slowmode": "Set or remove slowmode for a channel",
       "randomColour": "Returns a random hex colour.",
-      "purge": "Bulk delete a number of messages from this channel"
+      "purge": "Bulk delete a number of messages from this channel",
+      "fact": "Get a fun fact!"
     },
     "option": {
       "slowmode": {
