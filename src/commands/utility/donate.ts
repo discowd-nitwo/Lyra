@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
 import { config } from "../../config";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { baseEmbed } from "../../utils/embed";
-import { t } from "../../utils/i18n";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
 
 const command: ICommand = {
   name: "donate",

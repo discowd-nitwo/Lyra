@@ -3,7 +3,7 @@ import { readdirSync, statSync } from "fs";
 import { join } from "path";
 import { ICommand } from "./types";
 import * as dotenv from "dotenv";
-import { loadLocale } from "./utils/i18n";
+import { loadLocale } from "@utils/i18n";
 
 dotenv.config();
 

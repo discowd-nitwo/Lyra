@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { formatUUID } from "../../utils/formatUuid";
-import { baseEmbed } from "../../utils/embed";
+import { CommandEvent } from "@utils/CommandEvent";
+import { formatUUID } from "@utils/format";
+import { baseEmbed } from "@utils/embed";
 import { SlashCommandBuilder } from "discord.js";
 
 const command: ICommand = {

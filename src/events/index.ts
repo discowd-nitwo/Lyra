@@ -1,7 +1,7 @@
 import { join } from "path";
 import { LyraClient } from "../types";
 import { readdirSync } from "fs";
-import { logger } from "../utils/logger";
+import { logger } from "@utils/logger";
 
 export interface LyraEvent {
   name: string;

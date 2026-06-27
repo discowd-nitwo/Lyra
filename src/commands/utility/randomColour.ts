@@ -1,11 +1,11 @@
 import { AttachmentBuilder, ColorResolvable, SlashCommandBuilder } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { baseEmbed } from "../../utils/embed";
-import { randomHex } from "../../utils/random";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed } from "@utils/embed";
+import { randomHex } from "@utils/random";
 import { config } from "../../config";
-import { t } from "../../utils/i18n";
-import { generateColourImage } from "../../utils/colourImage";
+import { t } from "@utils/i18n";
+import { generateColourImage } from "@utils/colourImage";
 
 const command: ICommand = {
   name: "randomcolour",

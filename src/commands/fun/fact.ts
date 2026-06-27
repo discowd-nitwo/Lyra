@@ -1,10 +1,10 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { errorEmbed, infoEmbed } from "../../utils/embed";
-import { t } from "../../utils/i18n";
-import { CommandEvent } from "../../utils/CommandEvent";
+import { errorEmbed, infoEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
+import { CommandEvent } from "@utils/CommandEvent";
 import axios from "axios";
-import { logger } from "../../utils/logger";
+import { logger } from "@utils/logger";
 import { config } from "../../config";
 
 const command: ICommand = {

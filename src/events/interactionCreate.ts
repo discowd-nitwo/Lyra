@@ -1,10 +1,10 @@
 import { LyraEvent } from ".";
 import { Category, LyraClient } from "../types";
 import { GuildMember, Interaction, MessageFlags } from "discord.js";
-import { logger } from "../utils/logger";
-import { baseEmbed, errorEmbed } from "../utils/embed";
-import { t } from "../utils/i18n";
-import { CommandEvent } from "../utils/CommandEvent";
+import { logger } from "@utils/logger";
+import { baseEmbed, errorEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
+import { CommandEvent } from "@utils/CommandEvent";
 import { config } from "../config";
 
 const event: LyraEvent = {

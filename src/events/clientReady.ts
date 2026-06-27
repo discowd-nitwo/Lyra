@@ -1,7 +1,7 @@
 import { PresenceUpdateStatus } from "discord.js";
 import { LyraEvent } from ".";
 import { config } from "../config";
-import { logger, versionTag } from "../utils/logger";
+import { logger, versionTag } from "@utils/logger";
 
 const event: LyraEvent = {
   name: "clientReady",

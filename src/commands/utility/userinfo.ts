@@ -1,8 +1,8 @@
 import { GuildMember, SlashCommandBuilder, User } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { t } from "../../utils/i18n";
-import { baseEmbed, errorEmbed } from "../../utils/embed";
+import { CommandEvent } from "@utils/CommandEvent";
+import { t } from "@utils/i18n";
+import { baseEmbed, errorEmbed } from "@utils/embed";
 import { config } from "../../config";
 
 const command: ICommand = {

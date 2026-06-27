@@ -1,7 +1,7 @@
 import { Message, PartialMessage, EmbedBuilder, Events } from "discord.js";
 import { LyraEvent } from ".";
 import { LyraClient } from "../types";
-import { sendAuditLog, AuditEventType } from "../utils/auditLogger";
+import { sendAuditLog, AuditEventType } from "@utils/auditLogger";
 
 const event: LyraEvent = {
   name: Events.MessageUpdate,

@@ -1,7 +1,7 @@
 import { join } from "path";
 import { ICommand, LyraClient } from "../types";
 import { readdirSync, statSync } from "fs";
-import { logger } from "../utils/logger";
+import { logger } from "@utils/logger";
 
 export async function loadCommands(client:LyraClient): Promise<void> {
   const categoriesPath = join(__dirname);

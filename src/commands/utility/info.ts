@@ -1,10 +1,10 @@
 import { inlineCode, SlashCommandBuilder } from "discord.js";
 import { config } from "../../config";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { baseEmbed } from "../../utils/embed";
-import { formatUptime } from "../../utils/formatUptime";
-import { versionTag } from "../../utils/logger";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed } from "@utils/embed";
+import { formatUptime } from "@utils/format";
+import { versionTag } from "@utils/logger";
 import packageInfo from "../../../package.json";
 
 const command: ICommand = {

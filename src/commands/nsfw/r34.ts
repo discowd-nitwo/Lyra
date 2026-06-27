@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from "discord.js";
 import { ICommand, Category } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { baseEmbed, errorEmbed } from "../../utils/embed";
-import { t } from "../../utils/i18n";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed, errorEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
 import { fetchPosts } from "../../notifiers/danbooru";
-import { randomElement } from "../../utils/random";
+import { randomElement } from "@utils/random";
 import { config } from "../../config";
 
 const BANNED_TAGS = [

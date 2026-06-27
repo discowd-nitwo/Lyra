@@ -1,12 +1,12 @@
 import { join } from "path";
 import { LyraEvent } from "../../events";
 import { Category, ICommand, LyraClient } from "../../types";
-import { logger } from "../../utils/logger";
+import { logger } from "@utils/logger";
 import { readdirSync } from "fs";
-import { t } from "../../utils/i18n";
+import { t } from "@utils/i18n";
 import { SlashCommandBuilder } from "discord.js";
-import { errorEmbed, infoEmbed, successEmbed } from "../../utils/embed";
-import { CommandEvent } from "../../utils/CommandEvent";
+import { errorEmbed, infoEmbed, successEmbed } from "@utils/embed";
+import { CommandEvent } from "@utils/CommandEvent";
 import { config } from "../../config";
 
 async function reloadEvents(

@@ -2,10 +2,10 @@ import { Message } from "discord.js";
 import { LyraEvent } from ".";
 import { Category, LyraClient } from "../types";
 import { config } from "../config";
-import { CommandEvent } from "../utils/CommandEvent";
-import { baseEmbed, errorEmbed } from "../utils/embed";
-import { t } from "../utils/i18n";
-import { logger } from "../utils/logger";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed, errorEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
+import { logger } from "@utils/logger";
 
 const event: LyraEvent = {
   name: "messageCreate",

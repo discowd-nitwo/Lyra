@@ -1,8 +1,8 @@
 import { ChannelType, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { CommandEvent } from "../../utils/CommandEvent";
-import { baseEmbed, errorEmbed } from "../../utils/embed";
-import { t } from "../../utils/i18n";
+import { CommandEvent } from "@utils/CommandEvent";
+import { baseEmbed, errorEmbed } from "@utils/embed";
+import { t } from "@utils/i18n";
 import prisma from "../../database";
 
 const command: ICommand = {
