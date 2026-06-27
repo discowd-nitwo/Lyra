@@ -1,7 +1,7 @@
 {
   "name": "lyra",
   "version": "0.1.0",
-  "description": "A feature-rich Discord bot written TypeScript inspired by Ree6",
+  "description": "A feature-rich Discord bot written with TypeScript inspired by Ree6",
   "homepage": "https://github.com/discowd-nitwo/Lyra#readme",
   "bugs": {
     "url": "https://github.com/discowd-nitwo/Lyra/issues"

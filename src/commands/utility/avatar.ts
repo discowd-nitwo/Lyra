@@ -9,7 +9,7 @@ const command: ICommand = {
   name: "avatar",
   description: t("command.description.avatar"),
   category: Category.UTILITY,
-  aliases: [],
+  aliases: ["av"],
 
   async execute(event: CommandEvent): Promise<void> {
     let user: User | null = null;

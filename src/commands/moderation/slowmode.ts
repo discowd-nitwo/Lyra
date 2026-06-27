@@ -16,7 +16,7 @@ const command: ICommand = {
   async execute(event: CommandEvent) {
     const member = (event.interaction?.member ?? event.message?.member) as GuildMember | null;
     if (!member?.permissions.has(PermissionFlagsBits.ManageChannels)) {
-      await event.reply(errorEmbed(t("message.error.noPermission")));
+      await event.reply(errorEmbed(t("message.default.noPermission")));
       return;
     }
 

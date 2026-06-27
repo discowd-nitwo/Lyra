@@ -26,7 +26,7 @@ export const logger = winston.createLogger({
   ],
 });
 
-const versionTag = process.env.NODE_ENV === "dev" ? `v${config.version}_dev` : `v${config.version}`;
+export const versionTag = process.env.NODE_ENV === "dev" ? `v${config.version}_dev` : `v${config.version}`;
 const debugTag = process.env.LOG_LEVEL === "debug" ? " [debug mode]" : "";
 
 export function printBanner(): void {

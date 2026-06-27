@@ -1,10 +1,11 @@
 import { LyraEvent } from ".";
-import { LyraClient } from "../types";
-import { Interaction, MessageFlags } from "discord.js";
+import { Category, LyraClient } from "../types";
+import { GuildMember, Interaction, MessageFlags } from "discord.js";
 import { logger } from "../utils/logger";
-import { errorEmbed } from "../utils/embed";
+import { baseEmbed, errorEmbed } from "../utils/embed";
 import { t } from "../utils/i18n";
 import { CommandEvent } from "../utils/CommandEvent";
+import { config } from "../config";
 
 const event: LyraEvent = {
   name: "interactionCreate",
@@ -33,6 +34,22 @@ const event: LyraEvent = {
           flags: MessageFlags.Ephemeral
         });
         return;
+      }
+
+      if (command.category === Category.DEV) {
+        const isOwner = interaction.user.id === config.ownerId;
+        const isMasterGuild = interaction.guildId === config.masterGuildId;
+        const hasAdminRole = config.adminRoleId
+          ? (interaction.member instanceof GuildMember && interaction.member.roles.cache.has(config.adminRoleId))
+          : false;
+
+        if (!isOwner && !(isMasterGuild && hasAdminRole)) {
+          interaction.reply({
+            embeds: [errorEmbed(t("message.default.noPermission"))],
+            flags: MessageFlags.Ephemeral
+          });
+          return;
+        }
       }
 
       await command.execute(event);

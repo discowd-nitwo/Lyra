@@ -41,6 +41,8 @@ export interface LyraConfig {
   advertisement: string;
   version: string;
   ownerId: string;
+  masterGuildId: string | null;
+  adminRoleId: string | null;
 }
 
 export interface Rule34Post {

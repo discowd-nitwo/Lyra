@@ -15,7 +15,7 @@ const command: ICommand = {
   async execute(event: CommandEvent): Promise<void> {
     const embed = baseEmbed()
       .setTitle("Donations")
-      .setDescription("Whilst we don't currently have a way to donate to us, we recommend you take that money and donate to [Alveus Sanctuary](https://www.alveussanctuary.org/).\n\n" + 
+      .setDescription("We do have a way to [donate to us if you really want to](https://ko-fi.com/pooflabs), but we recommend you take that money and donate to [Alveus Sanctuary](https://www.alveussanctuary.org/).\n\n" + 
         "They do some awesome things and some of your favourite content creators may have already donated!\n\n" +
         "They also 24/7 livestream some of their animal ambassadors on [Twitch](https://www.twitch.tv/alveussanctuary)!")
       .setFooter({ 

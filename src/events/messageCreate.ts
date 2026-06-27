@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { LyraEvent } from ".";
-import { LyraClient } from "../types";
+import { Category, LyraClient } from "../types";
 import { config } from "../config";
 import { CommandEvent } from "../utils/CommandEvent";
 import { baseEmbed, errorEmbed } from "../utils/embed";
@@ -48,6 +48,21 @@ const event: LyraEvent = {
           embeds: [errorEmbed(t("message.default.onlyNSFW"))],
         });
         return;
+      }
+
+      if (command.category === Category.DEV) {
+        const isOwner = message.author.id === config.ownerId;
+        const isMasterGuild = message.guildId === config.masterGuildId;
+        const hasAdminRole = config.adminRoleId
+          ? (message.member?.roles.cache.has(config.adminRoleId) ?? false)
+          : false;
+
+        if (!isOwner && !(isMasterGuild && hasAdminRole)) {
+          message.reply({
+            embeds: [errorEmbed(t("message.default.noPermission"))]
+          });
+          return;
+        }
       }
 
       await command.execute(event);
