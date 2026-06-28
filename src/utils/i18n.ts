@@ -1,4 +1,6 @@
-import { logger } from "./logger";
+import { getLogger } from "./logger";
+
+const logger = getLogger("i18n")
 
 type Locale = Record<string, unknown>;
 

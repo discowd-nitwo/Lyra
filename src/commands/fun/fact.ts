@@ -4,8 +4,10 @@ import { errorEmbed, infoEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
 import axios from "axios";
-import { logger } from "@utils/logger";
+import { getLogger } from "@utils/logger";
 import { config } from "../../config";
+
+const logger = getLogger("fact")
 
 const command: ICommand = {
   name: "fact",

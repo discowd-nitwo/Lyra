@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Rule34Post } from "../types";
-import { logger } from "@utils/logger";
+import { getLogger } from "@utils/logger";
+
+const logger = getLogger("danbooru")
 
 const BASE_URL = "https://danbooru.donmai.us/posts.json?limit=50";
 

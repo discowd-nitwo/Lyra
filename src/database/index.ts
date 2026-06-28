@@ -1,6 +1,8 @@
 import { PrismaLibSql } from "@prisma/adapter-libsql";
 import { PrismaClient } from "@prisma/client";
-import { logger } from "@utils/logger";
+import { getLogger } from "@utils/logger";
+
+const logger = getLogger("database")
 
 const adapter = new PrismaLibSql({
   url: process.env.DATABASE_URL ?? "file:./dev.db",

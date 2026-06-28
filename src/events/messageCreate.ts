@@ -5,7 +5,9 @@ import { config } from "../config";
 import { CommandEvent } from "@utils/CommandEvent";
 import { baseEmbed, errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
-import { logger } from "@utils/logger";
+import { getLogger } from "@utils/logger";
+
+const logger = getLogger("messageCreate")
 
 const event: LyraEvent = {
   name: "messageCreate",

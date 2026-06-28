@@ -1,7 +1,9 @@
 import { ColorResolvable, EmbedBuilder, TextChannel } from "discord.js";
 import { LyraClient } from "../types";
-import { logger } from "./logger";
+import { getLogger } from "./logger";
 import prisma from "../database";
+
+const logger = getLogger("auditLogger")
 
 export enum AuditEventType {
   MEMBER_JOIN = "MEMBER_JOIN",

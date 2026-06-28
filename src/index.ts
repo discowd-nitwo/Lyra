@@ -1,11 +1,13 @@
 import "./instrument";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 import { ICommand, LyraClient } from "./types";
-import { logger, printBanner } from "@utils/logger";
+import { printBanner, getLogger } from "@utils/logger";
 import { loadCommands } from "./commands";
 import { loadEvents } from "./events";
 import { loadLocale } from "@utils/i18n";
 import prisma from "./database";
+
+const logger = getLogger("Lyra")
 
 async function bootstrap(): Promise<void> {
   printBanner();
