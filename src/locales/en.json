@@ -2,16 +2,17 @@
   "command": {
     "description": {
       "ping": "Check the bot's latency.",
-      "rule34": "Get a random image from Rule34.",
+      "rule34": "Get a random image from Danbooru.",
       "avatar": "Get a user's avatar.",
-      "auditlogsetup": "Setup audit logs in your server",
+      "auditlogsetup": "Setup audit logs in your server.",
       "userinfo": "Get information about a user.",
       "reload": "Hot-reload all events (bot owner only)",
       "donate": "Find out how to donate to us!",
-      "slowmode": "Set or remove slowmode for a channel",
+      "slowmode": "Set or remove slowmode for a channel.",
       "randomColour": "Returns a random hex colour.",
-      "purge": "Bulk delete a number of messages from this channel",
-      "fact": "Get a fun fact!"
+      "purge": "Bulk delete a number of messages from this channel.",
+      "fact": "Get a fun fact!",
+      "guildinfo": "Get information about the server."
     },
     "option": {
       "slowmode": {

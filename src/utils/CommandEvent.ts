@@ -5,6 +5,8 @@ import {
   EmbedBuilder,
   TextChannel,
   ChannelType,
+  ActionRowBuilder,
+  ButtonBuilder,
 } from "discord.js";
 import { LyraClient, ICommandEvent, IReplyOptions } from "../types";
 
@@ -17,7 +19,7 @@ export class CommandEvent implements ICommandEvent {
   constructor(
     client: LyraClient,
     interactionOrMessage: ChatInputCommandInteraction | Message,
-    args?: string[]
+    args?: string[],
   ) {
     this.client = client;
     this.args = args;
@@ -42,9 +44,10 @@ export class CommandEvent implements ICommandEvent {
     }
 
     return (
-      this.message?.channel.type === ChannelType.GuildText &&
-      (this.message?.channel as TextChannel).nsfw
-    ) ?? false;
+      (this.message?.channel.type === ChannelType.GuildText &&
+        (this.message?.channel as TextChannel).nsfw) ??
+      false
+    );
   }
 
   getMemberName(): string {
@@ -61,9 +64,28 @@ export class CommandEvent implements ICommandEvent {
     return this.message?.author.displayAvatarURL() ?? "";
   }
 
+  getMemberId(): string {
+    if (this.interaction) {
+      return this.interaction.member?.user.id ?? "Unknown";
+    }
+    return this.message?.author.id ?? "Unknown";
+  }
+
+  async replyWithComponents(
+    content: string,
+    components: ActionRowBuilder<ButtonBuilder>[],
+  ): Promise<Message> {
+    if (this.interaction) {
+      await this.interaction.reply({ content, components });
+      return this.interaction.fetchReply() as Promise<Message>;
+    } else {
+      return this.message!.reply({ content, components });
+    }
+  }
+
   async reply(
     content: string | EmbedBuilder | IReplyOptions,
-    deleteAfter?: number
+    deleteAfter?: number,
   ): Promise<void> {
     let response: Message | InteractionResponse | undefined;
 
@@ -80,8 +102,7 @@ export class CommandEvent implements ICommandEvent {
       ...(options.content && { content: options.content }),
       ...(options.embed && { embeds: [options.embed] }),
       ...(options.files && { files: options.files }),
-
-    }
+    };
 
     if (this.isSlashCommand() && this.interaction) {
       response = await this.interaction.reply(payload);

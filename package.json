@@ -1,6 +1,6 @@
 {
   "name": "lyra",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A feature-rich Discord bot written with TypeScript inspired by Ree6",
   "homepage": "https://github.com/discowd-nitwo/Lyra#readme",
   "bugs": {
@@ -19,7 +19,7 @@
     "build:win": "tsc && tsc-alias && xcopy /E /I /Y src\\locales dist\\locales",
     "start": "node dist/index.js",
     "dev": "npm run build:win && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
-    "dev:d": "ts-node src/deploy.ts && npm run dev",
+    "dev:d": "npm run build:win && node dist/deploy.js && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
     "deploy": "ts-node src/deploy.ts",
     "cleanup": "rimraf logs dist",
     "cleanup:db": "rimraf logs dev.db"

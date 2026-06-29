@@ -5,7 +5,7 @@ import { getLogger } from "@utils/logger";
 import { readdirSync } from "fs";
 import { t } from "@utils/i18n";
 import { SlashCommandBuilder } from "discord.js";
-import { errorEmbed, infoEmbed, successEmbed } from "@utils/embed";
+import { embedWithPrefix, errorEmbed, successEmbed } from "@utils/embed";
 import { CommandEvent } from "@utils/CommandEvent";
 import { config } from "../../config";
 
@@ -76,7 +76,7 @@ const command: ICommand = {
       return;
     }
 
-    await event.reply(infoEmbed(t("message.reload.reloading")));
+    await event.reply(embedWithPrefix("<:reload:1521280514143555834>", t("message.reload.reloading")));
 
     const { loaded, failed, errors } = await reloadEvents(event.client);
 

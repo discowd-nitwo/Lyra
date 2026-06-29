@@ -28,3 +28,9 @@ export function infoEmbed(description: string): EmbedBuilder {
     .setColor(config.mainColour as ColorResolvable)
     .setDescription(`ℹ️ ${description}`)
 }
+
+export function embedWithPrefix(prefix: string, description: string, colour?: ColorResolvable): EmbedBuilder {
+  return new EmbedBuilder()
+    .setColor(colour ?? config.mainColour as ColorResolvable)
+    .setDescription(`${prefix} ${description}`)
+}

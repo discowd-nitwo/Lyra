@@ -3,7 +3,7 @@ import { readdirSync, statSync } from "fs";
 import { join } from "path";
 import { ICommand } from "./types";
 import * as dotenv from "dotenv";
-import { loadLocale } from "@utils/i18n";
+import { loadLocale } from "./utils/i18n";
 
 dotenv.config();
 
@@ -20,7 +20,7 @@ async function deploy(): Promise<void> {
   for (const category of categories) {
     const categoryPath = join(categoriesPath, category);
     const commandFiles = readdirSync(categoryPath).filter(
-      (file) => file.endsWith(".ts") || file.endsWith(".js")
+      (file) => (file.endsWith(".ts") || file.endsWith(".js")) && !file.endsWith(".d.ts")
     );
 
     for (const file of commandFiles) {
