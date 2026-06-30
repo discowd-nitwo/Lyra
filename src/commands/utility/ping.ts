@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { infoEmbed } from "@utils/embed";
+import { embedWithPrefix, infoEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
 
@@ -13,8 +13,8 @@ const command: ICommand = {
   async execute(event: CommandEvent): Promise<void> {
     const latency = event.client.ws.ping;
 
-    const embed = infoEmbed(
-      t("message.ping.response", { latency: latency.toString() })
+    const embed = embedWithPrefix(
+      "🏓", t("message.ping.response", { latency: latency.toString() })
     );
 
     await event.reply(embed);

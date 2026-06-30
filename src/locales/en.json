@@ -53,7 +53,7 @@
       "notAllowed": "That tag is not allowed."
     },
     "ping": {
-      "response": "🏓 Pong! Latency: **{latency}ms**"
+      "response": "Pong! Latency: **{latency}ms**"
     },
     "purge": {
       "notTextChannel": "Purge can only be used in text channels.",
