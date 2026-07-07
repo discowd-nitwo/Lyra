@@ -18,8 +18,10 @@
     "build": "tsc && tsc-alias && cp -r src/locales dist/locales",
     "build:win": "tsc && tsc-alias && xcopy /E /I /Y src\\locales dist\\locales",
     "start": "node dist/index.js",
-    "dev": "npm run build:win && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
-    "dev:d": "npm run build:win && node dist/deploy.js && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
+    "dev:win": "npm run build:win && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
+    "dev:win:d": "npm run build:win && node dist/deploy.js && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
+    "dev": "npm run build && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
+    "dev:d": "npm run build && node dist/deploy.js && cross-env LOG_LEVEL=debug NODE_ENV=dev npm run start",
     "deploy": "ts-node src/deploy.ts",
     "cleanup": "rimraf logs dist",
     "cleanup:db": "rimraf logs dev.db"

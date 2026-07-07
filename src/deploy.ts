@@ -4,8 +4,11 @@ import { join } from "path";
 import { ICommand } from "./types";
 import * as dotenv from "dotenv";
 import { loadLocale } from "./utils/i18n";
+import { getLogger } from "@utils/logger";
 
 dotenv.config();
+
+const logger = getLogger("deploy")
 
 async function deploy(): Promise<void> {
   await loadLocale();
@@ -29,7 +32,7 @@ async function deploy(): Promise<void> {
 
       if (command?.getSlashCommand) {
         commands.push(command.getSlashCommand().toJSON());
-        console.log(`Registered slash command: ${command.name}`);
+        logger.info(`Registered slash command: ${command.name}`);
       }
     }
   }
@@ -38,14 +41,14 @@ async function deploy(): Promise<void> {
     process.env.DISCORD_TOKEN!
   );
 
-  console.log(`Deploying ${commands.length} slash commands...`);
+  logger.info(`Deploying ${commands.length} slash commands...`);
 
   await rest.put(
     Routes.applicationCommands(process.env.DISCORD_CLIENT_ID!),
     { body: commands }
   );
 
-  console.log("Slash commands deployed successfully!");
+  logger.info("Slash commands deployed successfully!");
 }
 
 deploy().catch(console.error);
