@@ -1,6 +1,6 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { errorEmbed, infoEmbed } from "@utils/embed";
+import { errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
 import axios from "axios";

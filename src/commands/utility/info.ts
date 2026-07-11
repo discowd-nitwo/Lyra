@@ -19,7 +19,7 @@ const command: ICommand = {
       .setTitle("Hiya, I'm Lyra!")
       .setThumbnail(event.client.user?.displayAvatarURL({ size: 1024 }) || null)
       .setDescription(
-        "A feature-rich Discord bot written with TypeScript inspired by Ree6",
+        "A feature-rich Discord bot written with <:Typescript:1524466424050090085> TypeScript inspired by [Ree6](https://www.ree6.de/)",
       )
       .addFields(
         { name: "Version", value: `${inlineCode(versionTag)}`, inline: true },

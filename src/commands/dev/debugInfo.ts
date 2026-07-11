@@ -47,6 +47,8 @@ const command: ICommand = {
             `Cached Messages: ${inlineCode(client.sweepers ? "enabled" : "disabled")}`,
             `Ping: ${inlineCode(`${client.ws.ping}ms`)}`,
             `Shard: ${inlineCode(client.shard ? client.shard.ids.join(", ") : "none")}`,
+            `Master Guild ID: ${inlineCode(config.masterGuildId ?? "Not set")}`,
+            `Owner ID: ${inlineCode(config.ownerId)}`
           ].join("\n"),
           inline: false,
         },
