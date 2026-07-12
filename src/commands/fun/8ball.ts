@@ -44,7 +44,7 @@ const command: ICommand = {
 
     const container = baseEmbedV2().addTextDisplayComponents(text => text.setContent(`# 🎱 8ball\n`+
         `**Question**\n`+
-        `*${question + !question?.endsWith('?') ? '?' : ''}*\n\n`+
+        `*${question}${!question?.endsWith('?') ? '?' : ''}*\n\n`+
         `**Answer**\n`+
         reply
     ));
