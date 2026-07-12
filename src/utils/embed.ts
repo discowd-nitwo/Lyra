@@ -1,8 +1,12 @@
-import { ColorResolvable, EmbedBuilder } from "discord.js";
+import { ColorResolvable, ContainerBuilder, EmbedBuilder } from "discord.js";
 import { config } from "../config";
 
 export function baseEmbed(): EmbedBuilder {
   return new EmbedBuilder().setColor(config.mainColour as ColorResolvable);
+}
+
+export function baseEmbedV2(): ContainerBuilder {
+  return new ContainerBuilder().setAccentColor(config.mainColour as number);
 }
 
 export function successEmbed(description: string): EmbedBuilder {

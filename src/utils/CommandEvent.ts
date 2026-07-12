@@ -7,6 +7,8 @@ import {
   ChannelType,
   ActionRowBuilder,
   ButtonBuilder,
+  ContainerBuilder,
+  MessageFlags,
 } from "discord.js";
 import { LyraClient, ICommandEvent, IReplyOptions } from "../types";
 
@@ -80,6 +82,23 @@ export class CommandEvent implements ICommandEvent {
       return this.interaction.fetchReply() as Promise<Message>;
     } else {
       return this.message!.reply({ content, components });
+    }
+  }
+
+  async replyWithComponentsV2(
+    components: ContainerBuilder,
+  ): Promise<Message> {
+    if (this.interaction) {
+      await this.interaction.reply({
+        components: [components],
+        flags: [MessageFlags.IsComponentsV2],
+      });
+      return this.interaction.fetchReply() as Promise<Message>;
+    } else {
+      return this.message!.reply({
+        components: [components],
+        flags: [MessageFlags.IsComponentsV2],
+      });
     }
   }
 
