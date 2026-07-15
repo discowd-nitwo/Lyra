@@ -25,7 +25,7 @@ const command: ICommand = {
         { name: "Version", value: `${inlineCode(versionTag)}`, inline: true },
         {
           name: "Contributors",
-          value: "<@931938914959228948>\n<@1511705313651462248>\n<@933424626976047156>",
+          value: "<@931938914959228948>\n<@901562525294927932>\n<@1511705313651462248>\n<@933424626976047156>",
           inline: true,
         },
         {
