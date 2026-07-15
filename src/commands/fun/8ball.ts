@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { Category, ICommand } from "../../types";
-import { baseEmbedV2 } from "@utils/embed";
+import { baseEmbedV2, errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
 
@@ -39,7 +39,14 @@ const command: ICommand = {
   aliases: ["magic-8ball"],
 
   async execute(event: CommandEvent): Promise<void> {
-    const question = event.interaction!.options.getString("prompt", true)
+    const question = event.isSlashCommand()
+      ? event.interaction?.options.getString("prompt", true)
+      : event.args!.join(" ");
+
+    if (!question) {
+      await event.reply(errorEmbed("Give me something to ask, e.g. `Will I win the lottery?`"));
+      return;
+    }
     const reply = EIGHT_BALL_RESPONSES[Math.floor(Math.random() * EIGHT_BALL_RESPONSES.length)];
 
     const container = baseEmbedV2().addTextDisplayComponents(text => text.setContent(`# 🎱 8ball\n`+
