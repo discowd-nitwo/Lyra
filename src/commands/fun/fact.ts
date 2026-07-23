@@ -21,7 +21,7 @@ const command: ICommand = {
     axios
       .get(apiUrl, {
         headers: {
-          "X-Api-Key": process.env.api_ninja_key,
+          "X-Api-Key": process.env.API_NINJA_KEY,
         },
       })
       .then((response) => {
