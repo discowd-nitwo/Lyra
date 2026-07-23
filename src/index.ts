@@ -47,7 +47,7 @@ bootstrap().catch((err) => {
   process.exit(1);
 })
 
-process.on("SIGNINT", async () => {
+process.on("SIGINT", async () => {
   await prisma.$disconnect();
   logger.info("Disconnected from database")
   process.exit(0)
