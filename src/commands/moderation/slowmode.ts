@@ -1,5 +1,5 @@
 import { PermissionFlagsBits, SlashCommandBuilder, TextChannel, GuildMember } from "discord.js";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { CommandEvent } from "@utils/CommandEvent";
 import { errorEmbed, infoEmbed, successEmbed, warnEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";

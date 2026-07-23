@@ -10,7 +10,7 @@ import {
   ContainerBuilder,
   MessageFlags,
 } from "discord.js";
-import { LyraClient, ICommandEvent, IReplyOptions } from "../types";
+import { LyraClient, ICommandEvent, IReplyOptions } from "@/types";
 
 export class CommandEvent implements ICommandEvent {
   client: LyraClient;

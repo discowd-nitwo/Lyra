@@ -1,6 +1,6 @@
 import { GuildMember, PartialGuildMember, EmbedBuilder, Events } from "discord.js";
 import { LyraEvent } from "./index";
-import { LyraClient } from "../types";
+import { LyraClient } from "@/types";
 import { sendAuditLog, AuditEventType } from "@utils/auditLogger";
 
 const event: LyraEvent = {

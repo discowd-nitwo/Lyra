@@ -1,6 +1,6 @@
 import { AuditLogEvent, EmbedBuilder, Events, GuildBan } from "discord.js";
 import { LyraEvent } from ".";
-import { LyraClient } from "../types";
+import { LyraClient } from "@/types";
 import { AuditEventType, sendAuditLog } from "@utils/auditLogger";
 
 const event: LyraEvent = {

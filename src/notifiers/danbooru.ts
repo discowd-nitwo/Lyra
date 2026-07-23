@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Rule34Post } from "../types";
+import { Rule34Post } from "@/types";
 import { getLogger } from "@utils/logger";
 
 const logger = getLogger("danbooru")

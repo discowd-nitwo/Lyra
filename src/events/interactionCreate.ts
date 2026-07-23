@@ -1,11 +1,11 @@
 import { LyraEvent } from ".";
-import { Category, LyraClient } from "../types";
+import { Category, LyraClient } from "@/types";
 import { GuildMember, Interaction, MessageFlags } from "discord.js";
 import { getLogger } from "@utils/logger";
 import { errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
-import { config } from "../config";
+import { config } from "@/config";
 
 const logger = getLogger("interactionCreate")
 
@@ -46,7 +46,7 @@ const event: LyraEvent = {
           : false;
 
         if (!isOwner && !(isMasterGuild && hasAdminRole)) {
-          interaction.reply({
+          await interaction.reply({
             embeds: [errorEmbed(t("message.default.noPermission"))],
             flags: MessageFlags.Ephemeral
           });

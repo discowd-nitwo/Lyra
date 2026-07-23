@@ -4,7 +4,7 @@ import {
   SlashCommandBuilder,
   TextChannel,
 } from "discord.js";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { CommandEvent } from "@utils/CommandEvent";
 import { errorEmbed, infoEmbed, successEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";

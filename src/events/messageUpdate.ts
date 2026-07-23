@@ -1,6 +1,6 @@
 import { Message, PartialMessage, EmbedBuilder, Events } from "discord.js";
 import { LyraEvent } from ".";
-import { LyraClient } from "../types";
+import { LyraClient } from "@/types";
 import { sendAuditLog, AuditEventType } from "@utils/auditLogger";
 
 const event: LyraEvent = {
@@ -21,7 +21,7 @@ const event: LyraEvent = {
         name: newMessage.author?.tag ?? "Unknown",
         iconURL: newMessage.author?.displayAvatarURL() ?? undefined,
       })
-      .setDescription(`> **Channel**: ${channelName} <#${newMessage.channelId}>\n> **Message ID**: ${`[${newMessage.id}`}](${newMessage.url})\n> **Message Author**: @${newMessage.author?.username} (<@${newMessage.author?.id}>)\n> **Message Created**: <t:${Math.floor(oldMessage.createdTimestamp / 1000)}:R>`)
+      .setDescription(`> **Channel**: ${channelName} <#${newMessage.channelId}>\n> **Message ID**: [${newMessage.id}](${newMessage.url})\n> **Message Author**: @${newMessage.author?.username} (<@${newMessage.author?.id}>)\n> **Message Created**: <t:${Math.floor(oldMessage.createdTimestamp / 1000)}:R>`)
       .addFields(
         { name: "Before", value: (oldMessage.content || "Unknown").slice(0, 1024), inline: true },
         { name: "After", value: (newMessage.content || "Unknown").slice(0, 1024), inline: true },

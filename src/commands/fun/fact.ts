@@ -1,11 +1,11 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";
 import axios from "axios";
 import { getLogger } from "@utils/logger";
-import { config } from "../../config";
+import { config } from "@/config";
 
 const logger = getLogger("fact")
 
@@ -35,10 +35,10 @@ const command: ICommand = {
       .catch(async (error) => {
         if (error.response) {
           logger.error("Error:", error.response.status, error.response.data);
-          event.reply(errorEmbed(error.response.data));
+          await event.reply(errorEmbed(error.response.data));
         } else {
           logger.error("Request failed:", error.message);
-          event.reply(errorEmbed(error.message));
+          await event.reply(errorEmbed(error.message));
         }
       });
   },

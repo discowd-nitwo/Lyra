@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { LyraEvent } from ".";
-import { Category, LyraClient } from "../types";
-import { config } from "../config";
+import { Category, LyraClient } from "@/types";
+import { config } from "@/config";
 import { CommandEvent } from "@utils/CommandEvent";
 import { baseEmbed, errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
@@ -16,7 +16,7 @@ const event: LyraEvent = {
   async execute(client: LyraClient, message: Message) {
     if (message.author.bot) return;
     if (message.content.startsWith(`<@${client.user?.id}>`)) {
-      message.react('👋')
+      await message.react('👋')
 
       const embed = baseEmbed()
         .setTitle("hey!")

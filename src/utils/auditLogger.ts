@@ -1,5 +1,5 @@
 import { ColorResolvable, EmbedBuilder, TextChannel } from "discord.js";
-import { LyraClient } from "../types";
+import { LyraClient } from "@/types";
 import { getLogger } from "./logger";
 import prisma from "../database";
 

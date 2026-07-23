@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { baseEmbedV2, errorEmbed } from "@utils/embed";
 import { t } from "@utils/i18n";
 import { CommandEvent } from "@utils/CommandEvent";

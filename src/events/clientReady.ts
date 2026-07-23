@@ -1,6 +1,6 @@
 import { PresenceUpdateStatus } from "discord.js";
 import { LyraEvent } from ".";
-import { config } from "../config";
+import { config } from "@/config";
 import { getLogger, versionTag } from "@utils/logger";
 
 const logger = getLogger("clientReady")

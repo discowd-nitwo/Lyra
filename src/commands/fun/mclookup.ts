@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { CommandEvent } from "@utils/CommandEvent";
 import { formatUUID } from "@utils/format";
 import { baseEmbed } from "@utils/embed";

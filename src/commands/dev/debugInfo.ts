@@ -1,7 +1,7 @@
 import { inlineCode, SlashCommandBuilder } from "discord.js";
 import * as os from "os";
-import { config } from "../../config";
-import { Category, ICommand } from "../../types";
+import { config } from "@/config";
+import { Category, ICommand } from "@/types";
 import { CommandEvent } from "@utils/CommandEvent";
 import { baseEmbed } from "@utils/embed";
 import { formatUptime } from "@utils/format";

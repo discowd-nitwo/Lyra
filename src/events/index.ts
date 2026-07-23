@@ -1,5 +1,5 @@
 import { join } from "path";
-import { LyraClient } from "../types";
+import { LyraClient } from "@/types";
 import { readdirSync } from "fs";
 import { getLogger } from "@utils/logger";
 
