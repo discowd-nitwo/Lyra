@@ -34,7 +34,7 @@ const EIGHT_BALL_RESPONSES = [
 
 const command: ICommand = {
   name: "8ball",
-  description: t("command.description.8ball"),
+  description: t("command.description.eightball"),
   category: Category.FUN,
   aliases: ["magic-8ball"],
 
@@ -62,7 +62,7 @@ const command: ICommand = {
   getSlashCommand(): SlashCommandBuilder {
     return new SlashCommandBuilder()
       .setName("8ball")
-      .setDescription(t("command.description.8ball")).addStringOption(
+      .setDescription(t("command.description.eightball")).addStringOption(
         opt => 
             opt.setName("prompt")
             .setDescription("Speak your question into the void.")
