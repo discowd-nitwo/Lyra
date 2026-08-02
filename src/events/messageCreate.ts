@@ -60,7 +60,7 @@ const event: LyraEvent = {
           : false;
 
         if (!isOwner && !(isMasterGuild && hasAdminRole)) {
-          message.reply({
+          await message.reply({
             embeds: [errorEmbed(t("message.default.noPermission"))]
           });
           return;

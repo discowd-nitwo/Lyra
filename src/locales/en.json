@@ -13,7 +13,9 @@
       "purge": "Bulk delete a number of messages from this channel.",
       "fact": "Get a fun fact!",
       "eightball": "Ask the magic 8-ball a question and get your fate decided.",
-      "guildinfo": "Get information about the server."
+      "guildinfo": "Get information about the server.",
+      "placeholder": "Command Description",
+      "role": "Add or a remove a user's role"
     },
     "option": {
       "slowmode": {
