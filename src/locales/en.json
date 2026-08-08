@@ -15,7 +15,8 @@
       "eightball": "Ask the magic 8-ball a question and get your fate decided.",
       "guildinfo": "Get information about the server.",
       "placeholder": "Command Description",
-      "role": "Add or a remove a user's role"
+      "role": "Add or a remove a user's role",
+      "coinflip": "Flip a coin!"
     },
     "option": {
       "slowmode": {
