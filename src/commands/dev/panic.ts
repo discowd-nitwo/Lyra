@@ -1,5 +1,5 @@
 import { CommandEvent } from "@utils/CommandEvent";
-import { Category, ICommand } from "../../types";
+import { Category, ICommand } from "@/types";
 import { getLogger } from "@utils/logger";
 import {
   ActionRowBuilder,

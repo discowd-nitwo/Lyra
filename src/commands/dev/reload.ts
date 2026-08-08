@@ -1,13 +1,13 @@
 import { join } from "path";
-import { LyraEvent } from "../../events";
-import { Category, ICommand, LyraClient } from "../../types";
+import { LyraEvent } from "@/events";
+import { Category, ICommand, LyraClient } from "@/types";
 import { getLogger } from "@utils/logger";
 import { readdirSync } from "fs";
 import { t } from "@utils/i18n";
 import { SlashCommandBuilder } from "discord.js";
 import { embedWithPrefix, errorEmbed, successEmbed } from "@utils/embed";
 import { CommandEvent } from "@utils/CommandEvent";
-import { config } from "../../config";
+import { config } from "@/config";
 
 const logger = getLogger("reload-events")
 
