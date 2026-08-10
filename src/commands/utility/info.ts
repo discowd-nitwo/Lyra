@@ -1,4 +1,4 @@
-import { inlineCode, SlashCommandBuilder } from "discord.js";
+import {ActionRowBuilder, ButtonBuilder, ButtonStyle, inlineCode, SlashCommandBuilder} from "discord.js";
 import { config } from "@/config";
 import { Category, ICommand } from "@/types";
 import { CommandEvent } from "@utils/CommandEvent";
@@ -24,11 +24,6 @@ const command: ICommand = {
       .addFields(
         { name: "Version", value: `${inlineCode(versionTag)}`, inline: true },
         {
-          name: "Contributors",
-          value: "<@931938914959228948>\n<@901562525294927932>\n<@1511705313651462248>\n<@933424626976047156>",
-          inline: true,
-        },
-        {
           name: "Uptime",
           value: `${formatUptime(process.uptime() * 1000)}`,
           inline: true,
@@ -49,7 +44,11 @@ const command: ICommand = {
         iconURL: event.getMemberAvatarUrl(),
       });
 
-      await event.reply(embed);
+      const discordButton = new ButtonBuilder().setStyle(ButtonStyle.Link).setLabel("Join our Discord!").setURL("https://discord.gg/U5f9kACj44")
+
+      const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(discordButton)
+
+      await event.replyWithComponents(embed, [actionRow]);
   },
 
   getSlashCommand(): SlashCommandBuilder {

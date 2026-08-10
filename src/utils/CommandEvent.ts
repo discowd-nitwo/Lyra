@@ -74,15 +74,36 @@ export class CommandEvent implements ICommandEvent {
   }
 
   async replyWithComponents(
-    content: string,
-    components: ActionRowBuilder<ButtonBuilder>[],
+      content: string | EmbedBuilder | IReplyOptions,
+      components: ActionRowBuilder<ButtonBuilder>[],
   ): Promise<Message> {
-    if (this.interaction) {
-      await this.interaction.reply({ content, components });
-      return this.interaction.fetchReply() as Promise<Message>;
+    let options: IReplyOptions;
+
+    if (typeof content === "string") {
+      options = { content };
+    } else if (content instanceof EmbedBuilder) {
+      options = { embed: content };
     } else {
-      return this.message!.reply({ content, components });
+      options = content;
     }
+
+    const payload = {
+      ...(options.content && { content: options.content }),
+      ...(options.embed && { embeds: [options.embed] }),
+      ...(options.files && { files: options.files }),
+      components,
+    };
+
+    if (this.isSlashCommand() && this.interaction) {
+      await this.interaction.reply(payload);
+      return this.interaction.fetchReply() as Promise<Message>;
+    }
+
+    if (this.message) {
+      return this.message.reply(payload);
+    }
+
+    throw new Error("No interaction or message available");
   }
 
   async replyWithComponentsV2(
