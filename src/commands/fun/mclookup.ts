@@ -1,9 +1,19 @@
 import axios from "axios";
-import { Category, ICommand } from "@/types";
-import { CommandEvent } from "@utils/CommandEvent";
-import { formatUUID } from "@utils/format";
-import { baseEmbed } from "@utils/embed";
-import { SlashCommandBuilder } from "discord.js";
+import {Category, ICommand} from "@/types";
+import {CommandEvent} from "@utils/CommandEvent";
+import {formatUUID} from "@utils/format";
+import {baseEmbedV2} from "@utils/embed";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  inlineCode,
+  SectionBuilder,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
+  SlashCommandBuilder,
+  TextDisplayBuilder
+} from "discord.js";
 
 const command: ICommand = {
   name: "mclookup",
@@ -12,15 +22,11 @@ const command: ICommand = {
   aliases: [],
 
   async execute(event: CommandEvent) {
-    if (!event.isSlashCommand()) {
-      await event.reply("We do not currently support text commands for this!", 5);
-      await event.message?.react("✅")
-      return;
-    }
+    const username = event.isSlashCommand()
+        ? event.interaction?.options.getString("username", true)
+        : event.args?.[0];
 
-    const username = event.interaction?.options.getString("username", true);
-
-    if (username === "") {
+    if (!username) {
       await event.reply("Make sure to supply a username!");
       return;
     }
@@ -42,15 +48,39 @@ const command: ICommand = {
     const uuid = uuidReq.data.id;
     const formattedUuid = formatUUID(uuid);
 
-    const embed = baseEmbed()
-      .setTitle(uuidReq.data.name)
-      .setURL(`https://namemc.com/profile/${uuid}`)
-      .setDescription(`**UUID**: \`${formattedUuid}\`\n**Stripped UUID**: \`${uuid}\`\n[Skin download](https://mineskin.eu/skin/${uuidReq.data.name})`)
-      .setThumbnail(`https://api.mineatar.io/face/${uuid}?scale=50`)
-      .setFooter({ text: "Lyra Bot", iconURL: event.client.user?.displayAvatarURL() })
-      .setTimestamp();
+    const componentsV2Section = new SectionBuilder().addTextDisplayComponents(text =>
+        text.setContent(`# ${uuidReq.data.name}\n`+
+        `**UUID**: ${inlineCode(formattedUuid)}\n` +
+        `**Stripped UUID**: ${inlineCode(uuid)}\n`
+    )).setThumbnailAccessory(
+        (thumbnail) =>
+            thumbnail.setURL(`https://api.mineatar.io/face/${uuid}?scale=50`)
+    )
 
-    await event.reply(embed);
+    const NameMCButton = new ButtonBuilder()
+        .setURL(`https://namemc.com/profile/${uuid}`)
+        .setLabel("NameMC Profile")
+        .setStyle(ButtonStyle.Link)
+        .setEmoji({ id: "1555518312895615016" });
+    const skinButton = new ButtonBuilder()
+        .setURL(`https://mineskin.eu/skin/${uuidReq.data.name}`)
+        .setLabel("Direct skin download")
+        .setStyle(ButtonStyle.Link)
+        .setEmoji({ id: "1555519291720204288" });
+
+    const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(NameMCButton, skinButton)
+
+    const separator = new SeparatorBuilder().setDivider(true).setSpacing(SeparatorSpacingSize.Small)
+
+    const footer = new TextDisplayBuilder().setContent(`-# Lyra Bot • <t:${Math.floor(Date.now() / 1000)}:R>`)
+
+    const container = baseEmbedV2()
+        .addSectionComponents(componentsV2Section)
+        .addActionRowComponents(actionRow)
+        .addSeparatorComponents(separator)
+        .addTextDisplayComponents(footer)
+
+    await event.replyWithComponentsV2(container);
   },
 
   getSlashCommand(): SlashCommandBuilder {
